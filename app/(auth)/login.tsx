@@ -1,6 +1,5 @@
 import { AntDesign } from '@expo/vector-icons';
 import { Link } from 'expo-router';
-import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   ImageBackground,
@@ -13,18 +12,16 @@ import {
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Button, ColorTokens, Input, Label, Text, Theme, XStack, YStack } from 'tamagui';
 
+import { useLoginForm } from '@/features/auth/hooks/use-login-form';
+
 const backgroundImage = require('@/assets/images/register_background.jpg');
 
-// Kolor placeholdera — widoczny szary w ciemnym motywie
 const PLACEHOLDER_COLOR = '#6b6b6b';
-
-// Tło karty formularza — ciemne, nieprzezroczyste
 const CARD_BG = '#1e1e1e';
 
 export default function LoginScreen() {
   const { t } = useTranslation();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const { email, setEmail, password, setPassword, isLoading, handleSubmit } = useLoginForm();
   const insets = useSafeAreaInsets();
 
   return (
@@ -133,9 +130,9 @@ export default function LoginScreen() {
                 size="$4"
                 theme="orange"
                 marginTop={4}
-                onPress={() => {
-                  /* TODO: login */
-                }}
+                disabled={isLoading}
+                opacity={isLoading ? 0.6 : 1}
+                onPress={handleSubmit}
               >
                 {t('auth.login.submit')}
               </Button>
