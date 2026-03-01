@@ -1,7 +1,7 @@
 {
   "auth": {
     "login": {
-      "title": "Sign in",
+      "title": "Log in to your account",
       "email": "Email",
       "emailPlaceholder": "your@email.com",
       "password": "Password",

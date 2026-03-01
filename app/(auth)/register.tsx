@@ -10,8 +10,12 @@ import {
   View,
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Button, Checkbox, ColorTokens, Input, Label, Text, Theme, XStack, YStack } from 'tamagui';
+import { Checkbox, ColorTokens, Theme, XStack, YStack } from 'tamagui';
 
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Text } from '@/components/ui/text';
 import { useRegisterForm } from '@/features/auth/hooks/use-register-form';
 
 const backgroundImage = require('@/assets/images/register_background.jpg');
@@ -79,9 +83,9 @@ export default function RegisterScreen() {
               gap={14}
             >
               <Text
+                weight="medium"
                 color="$color"
                 fontSize={22}
-                fontWeight="700"
                 textAlign="center"
                 marginBottom={4}
               >
@@ -168,6 +172,7 @@ export default function RegisterScreen() {
               <Button
                 size="$4"
                 theme="orange"
+                weight="medium"
                 marginTop={4}
                 disabled={!acceptedTerms || isLoading}
                 opacity={acceptedTerms && !isLoading ? 1 : 0.45}
@@ -183,7 +188,7 @@ export default function RegisterScreen() {
                 </Text>
                 <Link href="/(auth)/login" asChild>
                   <Button chromeless size="$2" paddingHorizontal={0}>
-                    <Text color="$orange10" fontSize={14} fontWeight="500">
+                    <Text color="$orange10" fontSize={14} weight="medium">
                       {t('auth.register.loginLink')}
                     </Text>
                   </Button>

@@ -10,8 +10,12 @@ import {
   View,
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Button, ColorTokens, Input, Label, Text, Theme, XStack, YStack } from 'tamagui';
+import { ColorTokens, Theme, XStack, YStack } from 'tamagui';
 
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Text } from '@/components/ui/text';
 import { useLoginForm } from '@/features/auth/hooks/use-login-form';
 
 const backgroundImage = require('@/assets/images/register_background.jpg');
@@ -67,13 +71,7 @@ export default function LoginScreen() {
               borderColor="rgba(255,255,255,0.06)"
               gap={14}
             >
-              <Text
-                color="$color"
-                fontSize={22}
-                fontWeight="700"
-                textAlign="center"
-                marginBottom={4}
-              >
+              <Text weight="medium" color="$color" fontSize={22} textAlign="center" marginBottom={4}>
                 {t('auth.login.title')}
               </Text>
 
@@ -109,7 +107,7 @@ export default function LoginScreen() {
                       /* TODO: forgot password */
                     }}
                   >
-                    <Text color="$orange10" fontSize={12}>
+                    <Text color="$orange10" fontSize={12} weight="medium">
                       {t('auth.login.forgotPassword')}
                     </Text>
                   </Button>
@@ -165,7 +163,7 @@ export default function LoginScreen() {
                 </Text>
                 <Link href="/(auth)/register" asChild>
                   <Button chromeless size="$2" paddingHorizontal={0}>
-                    <Text color="$orange10" fontSize={14} fontWeight="500">
+                    <Text color="$orange10" fontSize={14} weight="medium">
                       {t('auth.login.registerLink')}
                     </Text>
                   </Button>

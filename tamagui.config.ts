@@ -53,7 +53,9 @@ const themes = createV5Theme({
  */
 const barlowFont = createSystemFont({
   font: {
-    family: 'Barlow',
+    // 'Barlow-Regular' jako fallback gdy żaden face nie pasuje.
+    // Tamagui używa face mapping (poniżej) do rozwiązania fontWeight → fontFamily na native.
+    family: 'Barlow-Regular',
     face: {
       100: { normal: 'Barlow-Thin', italic: 'Barlow-ThinItalic' },
       200: { normal: 'Barlow-ExtraLight', italic: 'Barlow-ExtraLightItalic' },
@@ -88,31 +90,24 @@ const config = {
     heading: barlowFont,
     body: barlowFont,
   },
+  // fontFamily celowo nieobecne — ustawienie go tu blokowałoby Tamagui face mapping
+  // na native, uniemożliwiając rozwiązanie fontWeight → fontFamily (np. 600 → Barlow-SemiBold).
   defaultProps: {
-    Text: {
-      fontFamily: 'Barlow-Regular',
-      fontSize: 16,
-      fontWeight: '400',
-    },
-    Button: {
-      fontWeight: '500',
-    },
+    Text: { fontSize: 16 },
   },
 } as const;
 
-// The three suppressions below address a known circular-reference limitation in Tamagui's
-// module-augmentation pattern:  tamaguiConfig → createTamagui → TamaguiCustomConfig → Conf → typeof tamaguiConfig.
-// There is no way to break this cycle without losing type safety or removing the augmentation.
-
-// @ts-expect-error TS7022 – circular inference through TamaguiCustomConfig
+// @ts-expect-error TS7022 – circular inference: tamaguiConfig → createTamagui → TamaguiCustomConfig → Conf → typeof tamaguiConfig.
+// Ten cykl jest nieunikniony w RC Tamagui; @ts-expect-error sprawia że tamaguiConfig: any,
+// co umożliwia działanie pełnych typów komponentów Tamagui (wszystkie style props są akceptowane).
 export const tamaguiConfig = createTamagui(config);
 
 export default tamaguiConfig;
 
-// @ts-expect-error TS2456 – Conf circularly references tamaguiConfig
+// @ts-expect-error TS2456 – Conf cyklicznie referencjonuje tamaguiConfig
 export type Conf = typeof tamaguiConfig;
 
 declare module 'tamagui' {
-  // @ts-expect-error TS2310 – TamaguiCustomConfig recursively references Conf
+  // @ts-expect-error TS2310 – TamaguiCustomConfig rekurencyjnie referencjonuje Conf
   interface TamaguiCustomConfig extends Conf {}
 }

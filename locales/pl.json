@@ -1,7 +1,7 @@
 {
   "auth": {
     "login": {
-      "title": "Zaloguj się",
+      "title": "Logowanie",
       "email": "Email",
       "emailPlaceholder": "twoj@email.pl",
       "password": "Hasło",
