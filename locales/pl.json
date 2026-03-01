@@ -1,4 +1,8 @@
 {
+  "validation": {
+    "required": "Pole jest wymagane",
+    "invalidEmail": "Niepoprawny adres email"
+  },
   "auth": {
     "login": {
       "title": "Logowanie",
@@ -21,7 +25,9 @@
       "displayNamePlaceholder": "Jak mamy się do Ciebie zwracać?",
       "password": "Hasło",
       "passwordPlaceholder": "••••••••",
-      "acceptTerms": "Akceptuję regulamin oraz politykę prywatności serwisu",
+      "acceptTermsPre": "Akceptuję ",
+      "acceptTermsLink": "regulamin serwisu",
+      "acceptTermsPost": " oraz politykę prywatności",
       "submit": "Utwórz konto",
       "hasAccount": "Masz już konto?",
       "loginLink": "Zaloguj się"

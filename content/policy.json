@@ -1,0 +1,51 @@
+{
+  "title": "Regulamin serwisu",
+  "effectiveDate": "2026-03-01",
+  "sections": [
+    {
+      "id": "1",
+      "heading": "§1. Postanowienia ogólne",
+      "paragraphs": [
+        "Serwis Tavern Table (zwany dalej 'Serwisem') jest platformą umożliwiającą organizację sesji gier fabularnych, zarządzanie kampaniami oraz łączenie graczy i Mistrzów Gry w jednym miejscu.",
+        "Korzystając z Serwisu, użytkownik akceptuje niniejszy regulamin w całości. Jeśli użytkownik nie akceptuje któregokolwiek z postanowień, powinien zaprzestać korzystania z Serwisu.",
+        "Operatorem Serwisu jest podmiot prowadzący działalność pod nazwą Tavern Table, zwany dalej 'Operatorem'."
+      ]
+    },
+    {
+      "id": "2",
+      "heading": "§2. Konto użytkownika",
+      "paragraphs": [
+        "Rejestracja konta wymaga podania adresu e-mail, nazwy wyświetlanej oraz hasła. Użytkownik jest odpowiedzialny za podanie prawdziwych danych i zachowanie poufności danych dostępowych.",
+        "Jedno konto może być powiązane wyłącznie z jednym adresem e-mail. Zakładanie wielu kont przez jedną osobę w celu obejścia ograniczeń Serwisu jest zabronione.",
+        "Operator zastrzega sobie prawo do zawieszenia lub usunięcia konta, które narusza niniejszy regulamin lub jest wykorzystywane w sposób niezgodny z prawem."
+      ]
+    },
+    {
+      "id": "3",
+      "heading": "§3. Zasady korzystania",
+      "paragraphs": [
+        "Użytkownicy zobowiązują się do korzystania z Serwisu w sposób zgodny z prawem i dobrymi obyczajami. Zabronione jest zamieszczanie treści obraźliwych, wulgarnych, naruszających prawa osób trzecich lub promujących nienawiść.",
+        "Serwis jest przeznaczony dla osób, które ukończyły 13. rok życia. Osoby poniżej 18. roku życia powinny korzystać z Serwisu za wiedzą i zgodą rodziców lub opiekunów prawnych.",
+        "Zabrania się podejmowania działań zakłócających pracę Serwisu, w tym prób nieautoryzowanego dostępu do systemów informatycznych Operatora."
+      ]
+    },
+    {
+      "id": "4",
+      "heading": "§4. Prywatność i dane osobowe",
+      "paragraphs": [
+        "Operator przetwarza dane osobowe użytkowników zgodnie z obowiązującymi przepisami o ochronie danych osobowych, w tym z Rozporządzeniem (UE) 2016/679 (RODO).",
+        "Zbierane dane obejmują adres e-mail, nazwę wyświetlaną oraz informacje związane z aktywnością w Serwisie. Dane osobowe nie są sprzedawane ani udostępniane podmiotom trzecim bez zgody użytkownika.",
+        "Użytkownik ma prawo do wglądu, poprawiania oraz usunięcia swoich danych osobowych. W celu realizacji tych uprawnień należy skontaktować się z Operatorem."
+      ]
+    },
+    {
+      "id": "5",
+      "heading": "§5. Postanowienia końcowe",
+      "paragraphs": [
+        "Operator zastrzega sobie prawo do zmiany niniejszego regulaminu. O istotnych zmianach użytkownicy zostaną poinformowani drogą elektroniczną lub poprzez komunikat wyświetlony w Serwisie.",
+        "W sprawach nieuregulowanych niniejszym regulaminem zastosowanie mają przepisy prawa polskiego.",
+        "Wszelkie spory wynikłe z korzystania z Serwisu będą rozstrzygane przez sąd właściwy dla siedziby Operatora."
+      ]
+    }
+  ]
+}

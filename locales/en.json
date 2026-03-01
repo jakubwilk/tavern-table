@@ -1,4 +1,8 @@
 {
+  "validation": {
+    "required": "This field is required",
+    "invalidEmail": "Invalid email address"
+  },
   "auth": {
     "login": {
       "title": "Log in to your account",
@@ -21,7 +25,9 @@
       "displayNamePlaceholder": "What should we call you?",
       "password": "Password",
       "passwordPlaceholder": "••••••••",
-      "acceptTerms": "I accept the terms of service and privacy policy",
+      "acceptTermsPre": "I accept the ",
+      "acceptTermsLink": "terms of service",
+      "acceptTermsPost": " and privacy policy",
       "submit": "Create account",
       "hasAccount": "Already have an account?",
       "loginLink": "Sign in"

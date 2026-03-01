@@ -1,26 +1,28 @@
-import { useState } from 'react';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useMemo } from 'react';
+import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 
-import { authService } from '../services/auth.service';
+import { createLoginSchema, type LoginFormData } from '../schemas/login.schema';
+import { useLoginMutation } from './use-login-mutation';
 
 export function useLoginForm() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const { t } = useTranslation();
+  const mutation = useLoginMutation();
 
-  const handleSubmit = async () => {
-    if (!email || !password) return;
-    setIsLoading(true);
-    setError(null);
-    try {
-      await authService.login({ email, password });
-      // TODO: store tokens, navigate to (tabs)
-    } catch {
-      setError('Login failed. Check your credentials and try again.');
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  const schema = useMemo(() => createLoginSchema(t), [t]);
 
-  return { email, setEmail, password, setPassword, isLoading, error, handleSubmit };
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginFormData>({
+    resolver: zodResolver(schema),
+    mode: 'onChange',
+    defaultValues: { email: '', password: '' },
+  });
+
+  const onSubmit = handleSubmit((data) => mutation.mutate(data));
+
+  return { control, errors, isPending: mutation.isPending, onSubmit };
 }

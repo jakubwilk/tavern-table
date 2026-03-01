@@ -1,5 +1,6 @@
 import { Feather } from '@expo/vector-icons';
-import { Link } from 'expo-router';
+import { Link, useRouter } from 'expo-router';
+import { Controller } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import {
   ImageBackground,
@@ -10,7 +11,7 @@ import {
   View,
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Checkbox, ColorTokens, Theme, XStack, YStack } from 'tamagui';
+import { Checkbox, ColorTokens, Spinner, Theme, XStack, YStack } from 'tamagui';
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -25,18 +26,9 @@ const CARD_BG = '#1e1e1e';
 
 export default function RegisterScreen() {
   const { t } = useTranslation();
-  const {
-    email,
-    setEmail,
-    displayName,
-    setDisplayName,
-    password,
-    setPassword,
-    acceptedTerms,
-    setAcceptedTerms,
-    isLoading,
-    handleSubmit,
-  } = useRegisterForm();
+  const router = useRouter();
+  const { control, errors, isPending, acceptedTerms, setAcceptedTerms, onSubmit } =
+    useRegisterForm();
   const insets = useSafeAreaInsets();
 
   return (
@@ -93,54 +85,93 @@ export default function RegisterScreen() {
               </Text>
 
               {/* Email */}
-              <YStack gap={6}>
+              <YStack gap={4}>
                 <Label htmlFor="reg-email" color="$color10" fontSize={14}>
                   {t('auth.register.email')}
                 </Label>
-                <Input
-                  id="reg-email"
-                  value={email}
-                  onChangeText={setEmail}
-                  placeholder={t('auth.register.emailPlaceholder')}
-                  placeholderTextColor={PLACEHOLDER_COLOR as ColorTokens}
-                  keyboardType="email-address"
-                  autoCapitalize="none"
-                  autoCorrect={false}
-                  size="$4"
+                <Controller
+                  control={control}
+                  name="email"
+                  render={({ field: { value, onChange, onBlur } }) => (
+                    <Input
+                      id="reg-email"
+                      value={value}
+                      onChangeText={onChange}
+                      onBlur={onBlur}
+                      placeholder={t('auth.register.emailPlaceholder')}
+                      placeholderTextColor={PLACEHOLDER_COLOR as ColorTokens}
+                      keyboardType="email-address"
+                      autoCapitalize="none"
+                      autoCorrect={false}
+                      size="$4"
+                      borderColor={errors.email ? '$red10' : undefined}
+                    />
+                  )}
                 />
+                {errors.email && (
+                  <Text color="$red10" fontSize={12}>
+                    {errors.email.message}
+                  </Text>
+                )}
               </YStack>
 
               {/* Nazwa wyświetlana */}
-              <YStack gap={6}>
+              <YStack gap={4}>
                 <Label htmlFor="display-name" color="$color10" fontSize={14}>
                   {t('auth.register.displayName')}
                 </Label>
-                <Input
-                  id="display-name"
-                  value={displayName}
-                  onChangeText={setDisplayName}
-                  placeholder={t('auth.register.displayNamePlaceholder')}
-                  placeholderTextColor={PLACEHOLDER_COLOR as ColorTokens}
-                  autoCapitalize="words"
-                  autoCorrect={false}
-                  size="$4"
+                <Controller
+                  control={control}
+                  name="displayName"
+                  render={({ field: { value, onChange, onBlur } }) => (
+                    <Input
+                      id="display-name"
+                      value={value}
+                      onChangeText={onChange}
+                      onBlur={onBlur}
+                      placeholder={t('auth.register.displayNamePlaceholder')}
+                      placeholderTextColor={PLACEHOLDER_COLOR as ColorTokens}
+                      autoCapitalize="words"
+                      autoCorrect={false}
+                      size="$4"
+                      borderColor={errors.displayName ? '$red10' : undefined}
+                    />
+                  )}
                 />
+                {errors.displayName && (
+                  <Text color="$red10" fontSize={12}>
+                    {errors.displayName.message}
+                  </Text>
+                )}
               </YStack>
 
               {/* Hasło */}
-              <YStack gap={6}>
+              <YStack gap={4}>
                 <Label htmlFor="reg-password" color="$color10" fontSize={14}>
                   {t('auth.register.password')}
                 </Label>
-                <Input
-                  id="reg-password"
-                  value={password}
-                  onChangeText={setPassword}
-                  placeholder={t('auth.register.passwordPlaceholder')}
-                  placeholderTextColor={PLACEHOLDER_COLOR as ColorTokens}
-                  secureTextEntry
-                  size="$4"
+                <Controller
+                  control={control}
+                  name="password"
+                  render={({ field: { value, onChange, onBlur } }) => (
+                    <Input
+                      id="reg-password"
+                      value={value}
+                      onChangeText={onChange}
+                      onBlur={onBlur}
+                      placeholder={t('auth.register.passwordPlaceholder')}
+                      placeholderTextColor={PLACEHOLDER_COLOR as ColorTokens}
+                      secureTextEntry
+                      size="$4"
+                      borderColor={errors.password ? '$red10' : undefined}
+                    />
+                  )}
                 />
+                {errors.password && (
+                  <Text color="$red10" fontSize={12}>
+                    {errors.password.message}
+                  </Text>
+                )}
               </YStack>
 
               {/* Akceptacja zasad */}
@@ -156,16 +187,17 @@ export default function RegisterScreen() {
                     <Feather name="check" size={13} color="white" />
                   </Checkbox.Indicator>
                 </Checkbox>
-                <Label
-                  htmlFor="terms"
-                  flex={1}
-                  color="$color10"
-                  fontSize={14}
-                  lineHeight={20}
-                  paddingTop={2}
-                >
-                  {t('auth.register.acceptTerms')}
-                </Label>
+                <Text flex={1} color="$color10" fontSize={14} lineHeight={22} paddingTop={2}>
+                  {t('auth.register.acceptTermsPre')}
+                  <Text
+                    color="$orange10"
+                    style={{ textDecorationLine: 'underline' }}
+                    onPress={() => router.push('/policy')}
+                  >
+                    {t('auth.register.acceptTermsLink')}
+                  </Text>
+                  {t('auth.register.acceptTermsPost')}
+                </Text>
               </XStack>
 
               {/* Przycisk tworzenia konta */}
@@ -174,11 +206,11 @@ export default function RegisterScreen() {
                 theme="orange"
                 weight="medium"
                 marginTop={4}
-                disabled={!acceptedTerms || isLoading}
-                opacity={acceptedTerms && !isLoading ? 1 : 0.45}
-                onPress={handleSubmit}
+                disabled={!acceptedTerms || isPending}
+                opacity={acceptedTerms && !isPending ? 1 : 0.45}
+                onPress={onSubmit}
               >
-                {t('auth.register.submit')}
+                {isPending ? <Spinner size="small" color="silver" /> : t('auth.register.submit')}
               </Button>
 
               {/* Link powrotu do logowania */}

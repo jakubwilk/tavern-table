@@ -1,40 +1,32 @@
-import { useState } from 'react';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useMemo, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 
-import { authService } from '../services/auth.service';
+import { createRegisterSchema, type RegisterFormData } from '../schemas/register.schema';
+import { useRegisterMutation } from './use-register-mutation';
 
 export function useRegisterForm() {
-  const [email, setEmail] = useState('');
-  const [displayName, setDisplayName] = useState('');
-  const [password, setPassword] = useState('');
+  const { t } = useTranslation();
+  const mutation = useRegisterMutation();
   const [acceptedTerms, setAcceptedTerms] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
 
-  const handleSubmit = async () => {
-    if (!email || !displayName || !password || !acceptedTerms) return;
-    setIsLoading(true);
-    setError(null);
-    try {
-      await authService.register({ email, displayName, password });
-      // TODO: store tokens, navigate to (tabs)
-    } catch {
-      setError('Registration failed. Please try again.');
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  const schema = useMemo(() => createRegisterSchema(t), [t]);
 
-  return {
-    email,
-    setEmail,
-    displayName,
-    setDisplayName,
-    password,
-    setPassword,
-    acceptedTerms,
-    setAcceptedTerms,
-    isLoading,
-    error,
+  const {
+    control,
     handleSubmit,
-  };
+    formState: { errors },
+  } = useForm<RegisterFormData>({
+    resolver: zodResolver(schema),
+    mode: 'onChange',
+    defaultValues: { email: '', displayName: '', password: '' },
+  });
+
+  const onSubmit = handleSubmit((data) => {
+    if (!acceptedTerms) return;
+    mutation.mutate(data);
+  });
+
+  return { control, errors, isPending: mutation.isPending, acceptedTerms, setAcceptedTerms, onSubmit };
 }

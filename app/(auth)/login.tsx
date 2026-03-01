@@ -1,5 +1,6 @@
 import { AntDesign } from '@expo/vector-icons';
 import { Link } from 'expo-router';
+import { Controller } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import {
   ImageBackground,
@@ -10,7 +11,7 @@ import {
   View,
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { ColorTokens, Theme, XStack, YStack } from 'tamagui';
+import { ColorTokens, Spinner, Theme, XStack, YStack } from 'tamagui';
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -25,7 +26,7 @@ const CARD_BG = '#1e1e1e';
 
 export default function LoginScreen() {
   const { t } = useTranslation();
-  const { email, setEmail, password, setPassword, isLoading, handleSubmit } = useLoginForm();
+  const { control, errors, isPending, onSubmit } = useLoginForm();
   const insets = useSafeAreaInsets();
 
   return (
@@ -76,25 +77,38 @@ export default function LoginScreen() {
               </Text>
 
               {/* Email */}
-              <YStack gap={6}>
+              <YStack gap={4}>
                 <Label htmlFor="login-email" color="$color10" fontSize={14}>
                   {t('auth.login.email')}
                 </Label>
-                <Input
-                  id="login-email"
-                  value={email}
-                  onChangeText={setEmail}
-                  placeholder={t('auth.login.emailPlaceholder')}
-                  placeholderTextColor={PLACEHOLDER_COLOR as ColorTokens}
-                  keyboardType="email-address"
-                  autoCapitalize="none"
-                  autoCorrect={false}
-                  size="$4"
+                <Controller
+                  control={control}
+                  name="email"
+                  render={({ field: { value, onChange, onBlur } }) => (
+                    <Input
+                      id="login-email"
+                      value={value}
+                      onChangeText={onChange}
+                      onBlur={onBlur}
+                      placeholder={t('auth.login.emailPlaceholder')}
+                      placeholderTextColor={PLACEHOLDER_COLOR as ColorTokens}
+                      keyboardType="email-address"
+                      autoCapitalize="none"
+                      autoCorrect={false}
+                      size="$4"
+                      borderColor={errors.email ? '$red10' : undefined}
+                    />
+                  )}
                 />
+                {errors.email && (
+                  <Text color="$red10" fontSize={12}>
+                    {errors.email.message}
+                  </Text>
+                )}
               </YStack>
 
               {/* Hasło + link "Zapomniałeś hasła?" */}
-              <YStack gap={6}>
+              <YStack gap={4}>
                 <XStack justifyContent="space-between" alignItems="center">
                   <Label htmlFor="login-password" color="$color10" fontSize={14}>
                     {t('auth.login.password')}
@@ -112,15 +126,28 @@ export default function LoginScreen() {
                     </Text>
                   </Button>
                 </XStack>
-                <Input
-                  id="login-password"
-                  value={password}
-                  onChangeText={setPassword}
-                  placeholder={t('auth.login.passwordPlaceholder')}
-                  placeholderTextColor={PLACEHOLDER_COLOR as ColorTokens}
-                  secureTextEntry
-                  size="$4"
+                <Controller
+                  control={control}
+                  name="password"
+                  render={({ field: { value, onChange, onBlur } }) => (
+                    <Input
+                      id="login-password"
+                      value={value}
+                      onChangeText={onChange}
+                      onBlur={onBlur}
+                      placeholder={t('auth.login.passwordPlaceholder')}
+                      placeholderTextColor={PLACEHOLDER_COLOR as ColorTokens}
+                      secureTextEntry
+                      size="$4"
+                      borderColor={errors.password ? '$red10' : undefined}
+                    />
+                  )}
                 />
+                {errors.password && (
+                  <Text color="$red10" fontSize={12}>
+                    {errors.password.message}
+                  </Text>
+                )}
               </YStack>
 
               {/* Przycisk logowania */}
@@ -128,11 +155,11 @@ export default function LoginScreen() {
                 size="$4"
                 theme="orange"
                 marginTop={4}
-                disabled={isLoading}
-                opacity={isLoading ? 0.6 : 1}
-                onPress={handleSubmit}
+                disabled={isPending}
+                opacity={isPending ? 0.7 : 1}
+                onPress={onSubmit}
               >
-                {t('auth.login.submit')}
+                {isPending ? <Spinner size="small" color="silver" /> : t('auth.login.submit')}
               </Button>
 
               {/* Separator */}
