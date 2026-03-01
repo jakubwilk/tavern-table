@@ -71,7 +71,7 @@ I want to use it by myself, share with friends and people of the Internet. I wan
 
 # Technology stack
 
-- Tamagui for UI components, docs are here: https://tamagui.dev/
+- Tamagui for UI components, docs are here: https://tamagui.dev/llms.txt
 - React Native and Expo rules are here: https://gist.githubusercontent.com/bolaogun/680e7221d8021f0130fbf346cddc8ed0/raw/f45b4dcf45e3a97e501b4ac735d6f9cfc443570a/React_Expo_Impltn_Rules.md
 - Best practieses for React Native + Expo are here: https://jhwang09.github.io/best-practices-react-native-and-expo/
 - Axios: Use `axios` instance instead of raw import
