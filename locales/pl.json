@@ -1,0 +1,30 @@
+{
+  "auth": {
+    "login": {
+      "title": "Zaloguj się",
+      "email": "Email",
+      "emailPlaceholder": "twoj@email.pl",
+      "password": "Hasło",
+      "passwordPlaceholder": "••••••••",
+      "forgotPassword": "Zapomniałeś hasła?",
+      "submit": "Zaloguj się",
+      "or": "LUB",
+      "continueWithGoogle": "Kontynuuj przez Google",
+      "noAccount": "Nie masz konta?",
+      "registerLink": "Zarejestruj się"
+    },
+    "register": {
+      "title": "Utwórz konto",
+      "email": "Email",
+      "emailPlaceholder": "twoj@email.pl",
+      "displayName": "Nazwa wyświetlana",
+      "displayNamePlaceholder": "Jak mamy się do Ciebie zwracać?",
+      "password": "Hasło",
+      "passwordPlaceholder": "••••••••",
+      "acceptTerms": "Akceptuję regulamin oraz politykę prywatności serwisu",
+      "submit": "Utwórz konto",
+      "hasAccount": "Masz już konto?",
+      "loginLink": "Zaloguj się"
+    }
+  }
+}

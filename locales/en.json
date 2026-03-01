@@ -1,0 +1,30 @@
+{
+  "auth": {
+    "login": {
+      "title": "Sign in",
+      "email": "Email",
+      "emailPlaceholder": "your@email.com",
+      "password": "Password",
+      "passwordPlaceholder": "••••••••",
+      "forgotPassword": "Forgot password?",
+      "submit": "Sign in",
+      "or": "OR",
+      "continueWithGoogle": "Continue with Google",
+      "noAccount": "Don't have an account?",
+      "registerLink": "Sign up"
+    },
+    "register": {
+      "title": "Create account",
+      "email": "Email",
+      "emailPlaceholder": "your@email.com",
+      "displayName": "Display name",
+      "displayNamePlaceholder": "What should we call you?",
+      "password": "Password",
+      "passwordPlaceholder": "••••••••",
+      "acceptTerms": "I accept the terms of service and privacy policy",
+      "submit": "Create account",
+      "hasAccount": "Already have an account?",
+      "loginLink": "Sign in"
+    }
+  }
+}
