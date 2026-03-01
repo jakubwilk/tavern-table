@@ -109,5 +109,6 @@ export type Conf = typeof tamaguiConfig;
 
 declare module 'tamagui' {
   // @ts-expect-error TS2310 – TamaguiCustomConfig rekurencyjnie referencjonuje Conf
+  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
   interface TamaguiCustomConfig extends Conf {}
 }
