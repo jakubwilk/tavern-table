@@ -1,7 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Bash(node -e \"try { JSON.parse\\(require\\(''fs''\\).readFileSync\\(''e:/mobile/tavern-table/content/policy.json'', ''utf8''\\)\\); console.log\\(''JSON OK''\\); } catch\\(e\\) { console.error\\(''JSON ERROR:'', e.message\\); }\")"
-    ]
-  }
-}

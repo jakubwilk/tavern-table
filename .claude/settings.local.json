@@ -1,8 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Bash(npx expo install expo-localization)",
-      "Bash(npm install i18next react-i18next)"
-    ]
-  }
-}
